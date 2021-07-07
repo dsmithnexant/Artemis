@@ -55,6 +55,9 @@ function App() {
                 <LinkContainer to="/models">
                     <Nav.Link>Models</Nav.Link>
                   </LinkContainer>
+                <LinkContainer to="/upload">
+                    <Nav.Link>Upload File</Nav.Link>
+                  </LinkContainer>
                   </>
           ) : (
             <>
