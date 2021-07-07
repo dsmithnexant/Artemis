@@ -28,7 +28,7 @@ export default function Login() {
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
-      history.push("/");
+      history.push("/Artemis");
     } catch (e) {
       onError(e);
       setIsLoading(false);
