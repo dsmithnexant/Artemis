@@ -8,7 +8,7 @@ import Models from "./containers/Models";
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/Artemis">
         <Home />
       </Route>
       <Route exact path="/models">
