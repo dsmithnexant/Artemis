@@ -1,13 +1,14 @@
 {
   "name": "artemis",
   "version": "0.1.0",
-  "homepage":"https://dsmithnexant.github.io/Artemis/",
+  "homepage": "https://dsmithnexant.github.io/Artemis/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "aws-amplify": "^4.1.2",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.2",
