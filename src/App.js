@@ -16,18 +16,23 @@ function App() {
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         <LinkContainer to="/">
           <Navbar.Brand className="font-weight-bold text-muted">
-            Scratch
+            Project Artemis
           </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav activeKey={window.location.pathname}>
           {isAuthenticated ? (
+            <>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                <LinkContainer to="/models">
+                    <Nav.Link>Models</Nav.Link>
+                  </LinkContainer>
+                  </>
           ) : (
             <>
-              <LinkContainer to="/signup">
-                <Nav.Link>Signup</Nav.Link>
+              <LinkContainer to="/home">
+                <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
