@@ -55,7 +55,6 @@ export default function NewNote() {
     <div className="NewNote">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton

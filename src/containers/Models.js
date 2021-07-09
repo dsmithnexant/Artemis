@@ -55,7 +55,6 @@ export default function Models() {
         <p className="text-muted">Select your training data to upload.</p>
         <Form onSubmit={handleSubmit}>
         <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
