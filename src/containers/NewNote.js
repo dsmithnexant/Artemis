@@ -13,13 +13,11 @@ export default function NewNote() {
   const history = useHistory();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  function validateForm() {
-    return content.length < 1;
-  }
+  const [isDisabled, setIsDisabled] = React.useState(true);
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
+    setIsDisabled(!isDisabled);
   }
 
   async function handleSubmit(event) {
@@ -63,7 +61,7 @@ export default function NewNote() {
           size="lg"
           variant="primary"
           isLoading={isLoading}
-          disabled={!validateForm()}
+          disabled={isDisabled}
         >
           Submit File to S3 for Processing
         </LoaderButton>

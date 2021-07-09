@@ -13,13 +13,11 @@ export default function Models() {
   const history = useHistory();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  function validateForm() {
-    return content.length < 1;
-  }
+  const [isDisabled, setIsDisabled] = React.useState(true);
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
+    setIsDisabled(!isDisabled);
   }
 
   async function handleSubmit(event) {
@@ -63,7 +61,7 @@ export default function Models() {
           size="lg"
           variant="primary"
           isLoading={isLoading}
-          disabled={!validateForm()}
+          disabled={isDisabled}
         >
           Submit File to generate a new Model for a New Project
         </LoaderButton>
