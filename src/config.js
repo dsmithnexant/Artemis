@@ -1,5 +1,5 @@
 const config = {
-    MAX_ATTACHMENT_SIZE: 5000000,
+    MAX_ATTACHMENT_SIZE: 50000000000,
     s3: {
       REGION: "us-west-2",
       BUCKET: "dev-orion-models",
