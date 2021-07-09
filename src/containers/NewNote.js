@@ -38,7 +38,7 @@ export default function NewNote() {
   
     try {
       const attachment = file.current ? await s3Upload(file.current) : null;
-      history.push("/Artemis");
+      history.push("/success");
     } catch (e) {
       onError(e);
       setIsLoading(false);
