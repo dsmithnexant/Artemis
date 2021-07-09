@@ -15,7 +15,7 @@ export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
-    return content.length > 0;
+    return content.length < 1;
   }
 
   function handleFileChange(event) {
@@ -38,8 +38,6 @@ export default function NewNote() {
   
     try {
       const attachment = file.current ? await s3Upload(file.current) : null;
-  
-      await createNote({ content, attachment });
       history.push("/Artemis");
     } catch (e) {
       onError(e);
@@ -56,13 +54,6 @@ export default function NewNote() {
   return (
     <div className="NewNote">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="content">
-          <Form.Control
-            value={content}
-            as="textarea"
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </Form.Group>
         <Form.Group controlId="file">
           <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
@@ -75,7 +66,7 @@ export default function NewNote() {
           isLoading={isLoading}
           disabled={!validateForm()}
         >
-          Create
+          Submit File to S3 for Processing
         </LoaderButton>
       </Form>
     </div>
