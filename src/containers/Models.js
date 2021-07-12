@@ -15,7 +15,7 @@ export default function Models() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
-  const [riverInformation, setRiverInformation] = useState([{key: ''}]);
+  const [riverInformation, setRiverInformation] = useState([{key: 'No Models Found'}]);
   
   
 
@@ -63,6 +63,7 @@ export default function Models() {
 
   console.log(riverInformation.length);
   
+
   const listItems = riverInformation.map((link) =>
     <li key={link.key}>{link.key}</li>);  
 
