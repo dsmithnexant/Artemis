@@ -49,6 +49,7 @@ export default function Models() {
   // Models will be stored in the public folder. Each individual upload is linked
   // With the user id from cognito under private
   useEffect(() => {
+    //Storage.list('', { level: 'private' })
     Storage.list('')// { level: 'private' })
     .then(data =>
       setRiverInformation(data)
@@ -58,9 +59,16 @@ export default function Models() {
   console.log(riverInformation);
   
 
-  const listItems = riverInformation.map((link) =>
-    <li key={link.key}>{link.key}</li>);   
-
+/*   const listItems = riverInformation.map((link) =>
+    <li key={link.key}>{link.key}</li>);   */ 
+  
+  const listItems = riverInformation.map((link) =>  { 
+    if (link.key.length == 0) {
+        return null ;
+      } else if (link.key.length > 1) {
+        return (<li key={link.key}>{link.key}</li>);
+      } 
+    });
   return (
     <div className="Models">
       <div className="lander">
