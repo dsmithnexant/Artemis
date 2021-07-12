@@ -46,28 +46,20 @@ export default function Models() {
     }
   }
 
- /*  var bucketlist = Storage.list('', { level: 'private' })
-    .then((result) => {return result})
-    .catch(err => console.log(err)); */
-
+  // Models will be stored in the public folder. Each individual upload is linked
+  // With the user id from cognito under private
   useEffect(() => {
-    Storage.list('', { level: 'private' })
+    Storage.list('')// { level: 'private' })
     .then(data =>
       setRiverInformation(data)
     );
     }, [])
 
-  /* bucketlist is returning as Promise<pending>. Need to extract value from asynchronous 
-     Promise, then map that to list items 
-  */
-
-  console.log(riverInformation.length);
+  console.log(riverInformation);
   
 
   const listItems = riverInformation.map((link) =>
-    <li key={link.key}>{link.key}</li>);  
-
-  var items = [{ key: "key1", eTag: "value1" }, { key: "key2", eTag: "value2" }];
+    <li key={link.key}>{link.key}</li>);   
 
   return (
     <div className="Models">
