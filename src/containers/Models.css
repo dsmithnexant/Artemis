@@ -7,3 +7,12 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
   }
+
+.Models .list {
+    padding: 0 px 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+
+    text-align: left;
+  }

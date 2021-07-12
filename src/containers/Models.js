@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Models.css";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
@@ -15,6 +15,9 @@ export default function Models() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
+  const [riverInformation, setRiverInformation] = useState([{key: ''}]);
+  
+  
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
@@ -43,15 +46,25 @@ export default function Models() {
     }
   }
 
-  var bucketlist = Storage.list('', { level: 'private' })
+ /*  var bucketlist = Storage.list('', { level: 'private' })
     .then((result) => {return result})
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); */
+
+  useEffect(() => {
+    Storage.list('', { level: 'private' })
+    .then(data =>
+      setRiverInformation(data)
+    );
+    }, [])
 
   /* bucketlist is returning as Promise<pending>. Need to extract value from asynchronous 
      Promise, then map that to list items 
   */
 
-  console.log(bucketlist);
+  console.log(riverInformation.length);
+  
+  const listItems = riverInformation.map((link) =>
+    <li key={link.key}>{link.key}</li>);  
 
   var items = [{ key: "key1", eTag: "value1" }, { key: "key2", eTag: "value2" }];
 
@@ -60,10 +73,11 @@ export default function Models() {
       <div className="lander">
         <h1>Project Artemis Models</h1>
         <p className="text-muted">Below is an up to date list of models that exist.</p>
-        {/* <ul>
-          {bucketlist.map((item) =>
-            <li key={item.key}>{item.key}</li>)}
-        </ul> */}
+      <div className="list">
+        <ol>
+         {listItems} 
+        </ol>
+      </div>
       </div>
       <div className="lander">
         <h4>If you would like to create a new model upload data here </h4>
