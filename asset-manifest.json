@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Artemis/static/css/main.71fc7bec.chunk.css",
-    "main.js": "/Artemis/static/js/main.c90aa449.chunk.js",
-    "main.js.map": "/Artemis/static/js/main.c90aa449.chunk.js.map",
+    "main.css": "/Artemis/static/css/main.b9fc9393.chunk.css",
+    "main.js": "/Artemis/static/js/main.5a227308.chunk.js",
+    "main.js.map": "/Artemis/static/js/main.5a227308.chunk.js.map",
     "runtime-main.js": "/Artemis/static/js/runtime-main.b0dd1cdd.js",
     "runtime-main.js.map": "/Artemis/static/js/runtime-main.b0dd1cdd.js.map",
-    "static/js/2.953e7cc7.chunk.js": "/Artemis/static/js/2.953e7cc7.chunk.js",
-    "static/js/2.953e7cc7.chunk.js.map": "/Artemis/static/js/2.953e7cc7.chunk.js.map",
+    "static/js/2.5d1febf4.chunk.js": "/Artemis/static/js/2.5d1febf4.chunk.js",
+    "static/js/2.5d1febf4.chunk.js.map": "/Artemis/static/js/2.5d1febf4.chunk.js.map",
     "static/js/3.2da5aec8.chunk.js": "/Artemis/static/js/3.2da5aec8.chunk.js",
     "static/js/3.2da5aec8.chunk.js.map": "/Artemis/static/js/3.2da5aec8.chunk.js.map",
     "index.html": "/Artemis/index.html",
-    "static/css/main.71fc7bec.chunk.css.map": "/Artemis/static/css/main.71fc7bec.chunk.css.map",
-    "static/js/2.953e7cc7.chunk.js.LICENSE.txt": "/Artemis/static/js/2.953e7cc7.chunk.js.LICENSE.txt"
+    "static/css/main.b9fc9393.chunk.css.map": "/Artemis/static/css/main.b9fc9393.chunk.css.map",
+    "static/js/2.5d1febf4.chunk.js.LICENSE.txt": "/Artemis/static/js/2.5d1febf4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b0dd1cdd.js",
-    "static/js/2.953e7cc7.chunk.js",
-    "static/css/main.71fc7bec.chunk.css",
-    "static/js/main.c90aa449.chunk.js"
+    "static/js/2.5d1febf4.chunk.js",
+    "static/css/main.b9fc9393.chunk.css",
+    "static/js/main.5a227308.chunk.js"
   ]
 }
