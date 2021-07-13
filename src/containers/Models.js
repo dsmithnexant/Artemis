@@ -77,7 +77,7 @@ export default function Models() {
     <div className="Models">
       <div className="lander">
         <h1>Project Artemis Models</h1>
-        <p className="text-muted">Below is an up to date list of models that exist.</p>
+        <p className="text-muted">Below is an up to date list of models that exist in the system.</p>
       <div className="list">
         <List style={{maxHeight: 200, overflow: 'auto'}}>
          {listItems} 
@@ -99,7 +99,7 @@ export default function Models() {
             isLoading={isLoading}
             disabled={isDisabled}
           >
-            Submit File to generate a new Model for a New Project
+            Submit Training Data to Generate A New Model for A New Project
           </LoaderButton>
         </Form>
       </div>

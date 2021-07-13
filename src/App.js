@@ -54,10 +54,10 @@ function App() {
             <>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 <LinkContainer to="/models">
-                    <Nav.Link>Models</Nav.Link>
+                    <Nav.Link>Create New Model</Nav.Link>
                   </LinkContainer>
                 <LinkContainer to="/upload">
-                    <Nav.Link>Upload File</Nav.Link>
+                    <Nav.Link>Upload File for Existing Model</Nav.Link>
                   </LinkContainer>
                   </>
           ) : (

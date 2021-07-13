@@ -2,3 +2,21 @@
     height: 300px;
     font-size: 1.5rem;
   }
+
+.NewNote .list {
+    padding: 0 px 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    color:rgb(90,170,255);
+
+
+    text-align: left;
+  }
+
+
+  .NewNote .lander {
+    padding: 20px 0;
+    text-align: center;
+  }
+  
