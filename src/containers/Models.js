@@ -8,6 +8,10 @@ import config from "../config";
 import { s3Upload } from "../libs/awsLib";
 import { API } from "aws-amplify";
 import { Storage } from "aws-amplify";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 export default function Models() {
   const file = useRef(null);
@@ -15,7 +19,7 @@ export default function Models() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
-  const [riverInformation, setRiverInformation] = useState([{key: 'No Models Found'}]);
+  const [riverInformation, setRiverInformation] = useState([{key: ''}]);
   
   
 
@@ -66,7 +70,7 @@ export default function Models() {
     if (link.key.length == 0) {
         return null ;
       } else if (link.key.length > 1) {
-        return (<li key={link.key}>{link.key}</li>);
+        return (<ListItem key={link.key}>{link.key}</ListItem>);
       } 
     });
   return (
@@ -75,9 +79,9 @@ export default function Models() {
         <h1>Project Artemis Models</h1>
         <p className="text-muted">Below is an up to date list of models that exist.</p>
       <div className="list">
-        <ol>
+        <List style={{maxHeight: 200, overflow: 'auto'}}>
          {listItems} 
-        </ol>
+        </List>
       </div>
       </div>
       <div className="lander">

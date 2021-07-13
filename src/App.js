@@ -62,7 +62,7 @@ function App() {
                   </>
           ) : (
             <>
-              <LinkContainer to="/home">
+              <LinkContainer to="/Artemis">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
