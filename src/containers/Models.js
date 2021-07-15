@@ -70,6 +70,7 @@ export default function Models() {
     if (link.key.length == 0) {
         return null ;
       } else if (link.key.length > 1) {
+        link.key = link.key.replace('_Cubist Model.rds', '');;
         return (<ListItem key={link.key}>{link.key}</ListItem>);
       } 
     });
