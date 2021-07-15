@@ -22,8 +22,11 @@ export default function NewNote() {
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
-    setIsDisabled(!isDisabled);
-  }
+    console.log(file.current);
+    if (file.current != undefined) {
+        console.log(file.current.name.length > 1);
+        setIsDisabled(false);
+  }else{setIsDisabled(true)}}
 
   async function handleSubmit(event) {
     event.preventDefault();
