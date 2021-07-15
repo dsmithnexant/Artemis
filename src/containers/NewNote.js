@@ -50,7 +50,7 @@ export default function NewNote() {
   
 //Display list of files uploaded by specific user
 useEffect(() => {
-  Storage.list('', { level: 'private' })
+  Storage.list('existing-project/', { level: 'private' })
   //Storage.list('')// { level: 'private' })
   .then(data =>
     setRiverInformation(data)
@@ -67,6 +67,7 @@ const listItems = riverInformation.map((link) =>  {
   if (link.key.length == 0) {
       return null ;
     } else if (link.key.length > 1) {
+      link.key = link.key.replace('existing-project/', '');;
       return (<ListItem key={link.key}>{link.key}</ListItem>);
     } 
   });

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import config from "../config";
-import { s3Upload } from "../libs/awsLib";
+import { s3UploadModel } from "../libs/awsLib";
 import { API } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import List from '@material-ui/core/List';
@@ -42,7 +42,7 @@ export default function Models() {
     setIsLoading(true);
 
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
+      const attachment = file.current ? await s3UploadModel(file.current) : null;
       history.push("/success");
     } catch (e) {
       onError(e);
