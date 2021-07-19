@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/Artemis/static/css/main.e2dd5115.chunk.css",
-    "main.js": "/Artemis/static/js/main.5b8a1ae9.chunk.js",
-    "main.js.map": "/Artemis/static/js/main.5b8a1ae9.chunk.js.map",
+    "main.css": "/Artemis/static/css/main.7b9ff15f.chunk.css",
+    "main.js": "/Artemis/static/js/main.c91c7996.chunk.js",
+    "main.js.map": "/Artemis/static/js/main.c91c7996.chunk.js.map",
     "runtime-main.js": "/Artemis/static/js/runtime-main.4d58c4c3.js",
     "runtime-main.js.map": "/Artemis/static/js/runtime-main.4d58c4c3.js.map",
     "static/js/2.f4b9fb43.chunk.js": "/Artemis/static/js/2.f4b9fb43.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.c0384031.chunk.js": "/Artemis/static/js/3.c0384031.chunk.js",
     "static/js/3.c0384031.chunk.js.map": "/Artemis/static/js/3.c0384031.chunk.js.map",
     "index.html": "/Artemis/index.html",
-    "static/css/main.e2dd5115.chunk.css.map": "/Artemis/static/css/main.e2dd5115.chunk.css.map",
+    "static/css/main.7b9ff15f.chunk.css.map": "/Artemis/static/css/main.7b9ff15f.chunk.css.map",
     "static/js/2.f4b9fb43.chunk.js.LICENSE.txt": "/Artemis/static/js/2.f4b9fb43.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4d58c4c3.js",
     "static/js/2.f4b9fb43.chunk.js",
-    "static/css/main.e2dd5115.chunk.css",
-    "static/js/main.5b8a1ae9.chunk.js"
+    "static/css/main.7b9ff15f.chunk.css",
+    "static/js/main.c91c7996.chunk.js"
   ]
 }
