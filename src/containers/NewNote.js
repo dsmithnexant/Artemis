@@ -19,7 +19,7 @@ export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
-  const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
+  //const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
   
   function handleFileChange(event) {
     file.current = event.target.files[0];
@@ -64,22 +64,22 @@ useEffect(() => {
 console.log(riverInformation);
 
 
-useEffect(() => {
-  //Storage.list('', { level: 'private' })
-  Storage.list('')// { level: 'private' })
-  .then(data =>
-    setRiverInformation2(data)
-  );
-  }, [])
-const listItems2 = riverInformation2.map((link) =>  { 
-    if (link.key.length == 0) {
-        return null ;
-      } else if (link.key.length > 1) {
-        link.key = link.key.replace('_Cubist Model.rds', '');
-        link.key = link.key.replace(/.*_/, '');
-        return (<option value={link.key}>{link.key}</option>);
-      } 
-    });
+// useEffect(() => {
+//   //Storage.list('', { level: 'private' })
+//   Storage.list('')// { level: 'private' })
+//   .then(data =>
+//     setRiverInformation2(data)
+//   );
+//   }, [])
+// const listItems2 = riverInformation2.map((link) =>  { 
+//     if (link.key.length == 0) {
+//         return null ;
+//       } else if (link.key.length > 1) {
+//         link.key = link.key.replace('_Cubist Model.rds', '');
+//         link.key = link.key.replace(/.*_/, '');
+//         return (<option value={link.key}>{link.key}</option>);
+//       } 
+//     });
 
 /*   const listItems = riverInformation.map((link) =>
   <li key={link.key}>{link.key}</li>);   */ 
@@ -115,10 +115,10 @@ const listItems = riverInformation.map((link) =>  {
      
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="file">
-        <select> 
+        {/* <select> 
         <option>--Select a Program ID --</option>  
           {listItems2} 
-        </select>
+        </select> */}
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
