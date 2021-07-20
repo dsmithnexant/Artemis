@@ -106,6 +106,9 @@ const listItems = riverInformation.map((link) =>  {
       <div className="lander">
         <h1>Previous Project Data Uploads</h1>
         <p className="text-muted">Below is a list of all files uploaded by the current user.</p>
+        <p className="text-muted">File name should follow the convention outlined below <b>EXACTLY</b> to ensure processing completes successfully.</p>
+        <h5 className="text-muted">DIGITS-DIGITS-CHARACTERS.csv</h5>
+        <h10 className="text-muted">Example: 18-0003-thisisanexample.csv</h10>
      </div>
       <div className="list">
         <List style={{maxHeight: 200, overflow: 'auto'}}>
