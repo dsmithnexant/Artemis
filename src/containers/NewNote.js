@@ -31,6 +31,11 @@ export default function NewNote() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    var val_filename = /([0-9]+-[0-9]+)-\w*\.csv/.test(file.current.name);
+    if (val_filename != true) {
+      alert(' filename does not follow correct format specified.');
+      return false;
+    }
   
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
