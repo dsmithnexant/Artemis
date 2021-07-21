@@ -85,6 +85,9 @@ export default function Models() {
       <div className="lander">
         <h1>Project Artemis Models</h1>
         <p className="text-muted">Below is an up to date list of models that exist in the system.</p>
+        <h4>If you would like to create a new model upload data here </h4>
+        <h10 className="text-muted">File should be named <b>DIGITS-DIGITS.csv</b> </h10>
+        <p className="text-muted">Select your training data to upload.</p>
       <div className="list">
         <List style={{maxHeight: 200, overflow: 'auto'}}>
          {listItems} 
@@ -92,9 +95,6 @@ export default function Models() {
       </div>
       </div>
       <div className="lander">
-        <h4>If you would like to create a new model upload data here </h4>
-        <h10 className="text-muted">File should be named <b>DIGITS-DIGITS.csv</b> </h10>
-        <p className="text-muted">Select your training data to upload.</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="file">
             <Form.Control onChange={handleFileChange} type="file" />
