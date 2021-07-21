@@ -2,7 +2,9 @@ const config = {
     MAX_ATTACHMENT_SIZE: 50000000000,
     s3: {
       REGION: "us-west-2",
-      BUCKET: "dev-orion-models",
+      BUCKET: "prod-orion-landing-bucket",
+      //REGION: "us-west-2",
+      //BUCKET: "dev-orion-models",
     },
     apiGateway: {
       REGION: "us-west-2",
