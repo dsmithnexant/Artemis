@@ -31,6 +31,11 @@ export default function Models() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    var val_filename = /^([0-9]+-[0-9]+).csv/.test(file.current.name);
+    if (val_filename != true) {
+      alert(' filename does not follow correct format specified.');
+      return false;
+    }
 
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
@@ -88,6 +93,7 @@ export default function Models() {
       </div>
       <div className="lander">
         <h4>If you would like to create a new model upload data here </h4>
+        <h10 className="text-muted">File should be named <b>DIGITS-DIGITS.csv</b> </h10>
         <p className="text-muted">Select your training data to upload.</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="file">
