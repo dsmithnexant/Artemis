@@ -9,8 +9,13 @@ import { s3Upload } from "../libs/awsLib";
 import { API } from "aws-amplify";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
 import { Storage } from "aws-amplify";
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function NewNote() {
   const file = useRef(null);
@@ -105,22 +110,92 @@ const listItems = riverInformation.map((link) =>  {
     });
   }
 
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+  }));
+  
+  const classes = useStyles();
+
   return (
     <div className="NewNote">
       
       <div className="lander">
         <h1>Previous Project Data Uploads</h1>
-        <p className="text-muted">Below is a list of all files uploaded by the current user.</p>
-        <p className="text-muted">File name should follow the convention outlined below <b>EXACTLY</b> to ensure processing completes successfully.</p>
-        <h5 className="text-muted">DIGITS-DIGITS-CHARACTERS.csv</h5>
-        <h10 className="text-muted">Example: 18-0003-thisisanexample.csv</h10>
      </div>
-      <div className="list">
+     <div className={classes.root}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}> <b>Uploads for Existing Projects</b></Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Below is a list of all files uploaded by the current user. Each individual user can only see the files they have uploaded.
+            If a model/project already exist in the system and you want to generate new predictions, upload data here.
+            <div className="list">
         <List style={{maxHeight: 200, overflow: 'auto'}}>
          {listItems} 
         </List>
       </div>
-     
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography className={classes.heading}><b>Naming Your File</b></Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            The project Artemis data pipeline is developed to only accept file uploads following a specific nomenclature.
+            First, all files uploaded must have the extension type <b>.csv</b>. 
+            <br></br>
+            <br></br>
+            Files should be named using the following convention where DIGITS refers to any numeric value <b>[0-9]</b> and CHARACTERS refers to <b>[a-z]</b>.
+            <br></br>
+            <br></br>
+             <b>DIGITS-DIGITS-CHARACTERS.csv</b>
+            <br></br>
+            <br></br>
+             <i>Example: 18-0003-thisisanexample.csv</i>
+            <br></br>
+            <br></br>
+            If any of these rules are not followed you will recieve an alert message and will <b>NOT</b> be able to upload
+            your file.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography className={classes.heading}><b>Questions?</b></Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            If you have any questions or suggestions regarding project Artemis reach out to
+             <b> dsmith@nexant.com </b>for further detail.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+    <br></br>
+    <br></br>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="file">
         {/* <select> 
