@@ -10,9 +10,10 @@ export async function s3Upload(file) {
   return stored.key;
 }
 
-export async function s3UploadModel(file) {
-  const filename = `${'training-data/'}${file.name}`;
-
+export async function s3UploadModel(file,date1,date2) {
+  const date1string = JSON.stringify(date1);
+  const date2string = JSON.stringify(date1);
+  const filename = `${'training-data/'}${date1string.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g)}${'='}${date2string.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g)}${'='}${file.name}`;
   const stored = await Storage.vault.put(filename, file, {
     contentType: file.type,
   });

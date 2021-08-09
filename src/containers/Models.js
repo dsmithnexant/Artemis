@@ -16,6 +16,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DatePicker from 'react-date-picker';
 
 
 export default function Models() {
@@ -25,10 +26,11 @@ export default function Models() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
+  const [date1, onChange] = useState('');
+  const [date2, onChange2] = useState('');
   
   function handleFileChange(event) {
     file.current = event.target.files[0];
-    console.log(file.current);
     if (file.current != undefined) {
         console.log(file.current.name.length > 1);
         setIsDisabled(false);
@@ -37,6 +39,10 @@ export default function Models() {
   async function handleSubmit(event) {
     event.preventDefault();
     var val_filename = /^([0-9]+-[0-9]+).csv/.test(file.current.name);
+    if ((date1 == '') || (date2 == '')) {
+      alert('Please specify a start and end date below.');
+      return false;
+    }
     if (val_filename != true) {
       alert(' filename does not follow correct format specified.');
       return false;
@@ -53,7 +59,7 @@ export default function Models() {
     setIsLoading(true);
 
     try {
-      const attachment = file.current ? await s3UploadModel(file.current) : null;
+      const attachment = file.current ? await s3UploadModel(file.current,date1,date2) : null;
       history.push("/success");
     } catch (e) {
       onError(e);
@@ -175,6 +181,24 @@ export default function Models() {
     <br></br>
     <br></br>
     <Form onSubmit={handleSubmit}>
+      <h5><b>Start Date:</b>&nbsp; &nbsp;<DatePicker
+          onChange={onChange}
+          value={date1}
+          format="MM/d/y"
+          required = {true}
+          maxDate = {date2}
+        /></h5>
+        <br></br>
+        <br></br>
+       <h5><b>End Date:</b> &nbsp; &nbsp; <DatePicker
+          onChange={onChange2}
+          value={date2}
+          format="MM/d/y"
+          required = {true}
+          minDate = {date1}
+        /></h5>
+        <br></br>
+        <br></br>
       <Form.Group controlId="file">
         <Form.Control onChange={handleFileChange} type="file" />
       </Form.Group>
