@@ -10,14 +10,21 @@ import { API } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles,makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DatePicker from 'react-date-picker';
-
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 
 export default function Models() {
   const file = useRef(null);
@@ -28,7 +35,77 @@ export default function Models() {
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
   const [date1, onChange] = useState('');
   const [date2, onChange2] = useState('');
+
   
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+
+const columns = [
+  { id: 'model', label: 'Model', minWidth: 5 }
+];
+
+function createData(model) {
+
+  return { model };
+}
+  
+// const rows = [
+//   createData('India', 'IN', 1324171354, 3287263),
+//   createData('China', 'CN', 1403500365, 9596961),
+//   createData('Italy', 'IT', 60483973, 301340),
+//   createData('United States', 'US', 327167434, 9833520),
+//   createData('Canada', 'CA', 37602103, 9984670),
+//   createData('Australia', 'AU', 25475400, 7692024),
+//   createData('Germany', 'DE', 83019200, 357578),
+//   createData('Ireland', 'IE', 4857000, 70273),
+//   createData('Mexico', 'MX', 126577691, 1972550),
+//   createData('Japan', 'JP', 126317000, 377973),
+//   createData('France', 'FR', 67022000, 640679),
+//   createData('United Kingdom', 'GB', 67545757, 242495),
+//   createData('Russia', 'RU', 146793744, 17098246),
+//   createData('Nigeria', 'NG', 200962417, 923768),
+//   createData('Brazil', 'BR', 210147125, 8515767),
+// ];
+  
+const useStyles2 = makeStyles({
+  root: {
+    width: '50%',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  container: {
+    maxHeight: 440,
+    justifyContent: 'center',
+  },
+});
+  
+const classes2 = useStyles2();
+
   function handleFileChange(event) {
     file.current = event.target.files[0];
     if (file.current != undefined) {
@@ -92,7 +169,14 @@ export default function Models() {
       } 
     });
 
-
+  const rows = riverInformation.map((link) =>  { 
+    if (link.key.length == 0) {
+        return createData() ;
+      } else if (link.key.length > 1) {
+        link.key = link.key.replace('_Cubist Model.rds', '');;
+        return createData(link.key)
+      } 
+    });
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -126,10 +210,58 @@ export default function Models() {
             Below is a list of all the models that exist in the Project Artemis ecosystem. If you would like to create a 
             new model for a new project follow the directions below.
             <br></br>
-            <div className="list">
+            <br></br>
+            {/* <div className="list">
               <List style={{maxHeight: 200, overflow: 'auto'}}>
               {listItems} 
               </List>
+            </div> */}
+
+            <div className="list">
+                  <Paper className={classes2.root}>
+            <TableContainer className={classes2.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <StyledTableRow>
+                    {columns.map((column) => (
+                      <StyledTableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </StyledTableCell>
+                    ))}
+                  </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    return (
+                      <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <StyledTableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number' ? column.format(value) : value}
+                            </StyledTableCell>
+                          );
+                        })}
+                      </StyledTableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100,5000]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
             </div>
           </Typography>
         </AccordionDetails>
@@ -157,6 +289,9 @@ export default function Models() {
              <i>Example: 18-0003.csv</i>
             <br></br>
             <br></br>
+            Also be sure to select an <b>Intervention Start Date</b> and <b>Persistence Start Date</b> below using the date selectors.
+            <br></br>
+            <br></br>
             If any of these rules are not followed you will recieve an alert message and will <b>NOT</b> be able to upload
             your file.
           </Typography>
@@ -181,7 +316,7 @@ export default function Models() {
     <br></br>
     <br></br>
     <Form onSubmit={handleSubmit}>
-      <h5><b>Start Date:</b>&nbsp; &nbsp;<DatePicker
+      <h5><b>Intervention Start Date:</b>&nbsp; &nbsp;<DatePicker
           onChange={onChange}
           value={date1}
           format="MM/d/y"
@@ -190,7 +325,7 @@ export default function Models() {
         /></h5>
         <br></br>
         <br></br>
-       <h5><b>End Date:</b> &nbsp; &nbsp; <DatePicker
+       <h5><b>Persistence Start Date:</b> &nbsp; &nbsp; <DatePicker
           onChange={onChange2}
           value={date2}
           format="MM/d/y"

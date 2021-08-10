@@ -10,12 +10,20 @@ import { API } from "aws-amplify";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Storage } from "aws-amplify";
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles,makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 
 export default function NewNote() {
   const file = useRef(null);
@@ -25,7 +33,59 @@ export default function NewNote() {
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
   //const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+const columns = [
+  { id: 'uploaded', label: 'Files Uploaded', minWidth: 5 }
+];
+
+function createData(uploaded) {
+
+  return { uploaded };
+}
   
+const useStyles2 = makeStyles({
+  root: {
+    width: '50%',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  container: {
+    maxHeight: 440,
+    justifyContent: 'center',
+  },
+});
+  
+const classes2 = useStyles2();
+
+
+
+
   function handleFileChange(event) {
     file.current = event.target.files[0];
     console.log(file.current);
@@ -103,6 +163,15 @@ const listItems = riverInformation.map((link) =>  {
     } 
   });
 
+const rows = riverInformation.map((link) =>  { 
+  if (link.key.length == 0) {
+      return createData() ;
+    } else if (link.key.length > 1) {
+      link.key = link.key.replace('_Cubist Model.rds', '');;
+      return createData(link.key)
+    } 
+  });
+
 
   function createNote(note) {
     return API.post("dev-Orion-REST-Api", "/uploads", {
@@ -142,11 +211,60 @@ const listItems = riverInformation.map((link) =>  {
           <Typography>
             Below is a list of all files uploaded by the current user. Each individual user can only see the files they have uploaded.
             If a model/project already exist in the system and you want to generate new predictions, upload data here.
-            <div className="list">
+            {/* <div className="list">
         <List style={{maxHeight: 200, overflow: 'auto'}}>
          {listItems} 
         </List>
-      </div>
+      </div> */}
+      <br></br>
+      <br></br>
+        <div className="list">
+                          <Paper className={classes2.root}>
+                    <TableContainer className={classes2.container}>
+                      <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                          <StyledTableRow>
+                            {columns.map((column) => (
+                              <StyledTableCell
+                                key={column.id}
+                                align={column.align}
+                                style={{ minWidth: column.minWidth }}
+                              >
+                                {column.label}
+                              </StyledTableCell>
+                            ))}
+                          </StyledTableRow>
+                        </TableHead>
+                        <TableBody>
+                          {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                              <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                {columns.map((column) => {
+                                  const value = row[column.id];
+                                  return (
+                                    <StyledTableCell key={column.id} align={column.align}>
+                                      {column.format && typeof value === 'number' ? column.format(value) : value}
+                                    </StyledTableCell>
+                                  );
+                                })}
+                              </StyledTableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[10, 25, 100,5000]}
+                      component="div"
+                      count={rows.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </Paper>
+                    </div>
+
           </Typography>
         </AccordionDetails>
       </Accordion>
