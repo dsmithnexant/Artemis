@@ -24,6 +24,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import SelectSearch from 'react-select-search';
+import fuzzySearch from "./fuzzySearch";
 
 export default function NewNote() {
   const file = useRef(null);
@@ -32,7 +34,8 @@ export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
-  //const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
+  const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
+  const [selectedid, onChange] = useState('');
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -96,9 +99,14 @@ const classes2 = useStyles2();
 
   async function handleSubmit(event) {
     event.preventDefault();
-    var val_filename = /^([0-9]+-[0-9]+)-\w*\.csv/.test(file.current.name);
+    //var val_filename = /^([0-9]+-[0-9]+)-\w*\.csv/.test(file.current.name);
+    var val_filename = /\.csv/.test(file.current.name);
     if (val_filename != true) {
-      alert(' filename does not follow correct format specified.');
+      alert(' filename must have .csv file extension.');
+      return false;
+    }
+    if (selectedid == '') {
+      alert(' You must select a Project Id from the dropdown menu.');
       return false;
     }
   
@@ -114,20 +122,29 @@ const classes2 = useStyles2();
     setIsLoading(true);
   
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
+      const attachment = file.current ? await s3Upload(file.current,selectedid) : null;
       history.push("/success");
     } catch (e) {
       onError(e);
       setIsLoading(false);
     }
   }
-  
+
+console.log(selectedid)
 //Display list of files uploaded by specific user
 useEffect(() => {
   Storage.list('existing-project/', { level: 'private' })
   //Storage.list('')// { level: 'private' })
   .then(data =>
     setRiverInformation(data)
+  );
+  }, [])
+
+useEffect(() => {
+  //Storage.list('existing-project/', { level: 'private' })
+  Storage.list('')// { level: 'private' })
+  .then(data2 =>
+    setRiverInformation2(data2)
   );
   }, [])
 
@@ -167,8 +184,17 @@ const rows = riverInformation.map((link) =>  {
   if (link.key.length == 0) {
       return createData() ;
     } else if (link.key.length > 1) {
-      link.key = link.key.replace('_Cubist Model.rds', '');;
       return createData(link.key)
+    } 
+  });
+
+const listItems2 = riverInformation2.map((link) =>  { 
+  if (link.key.length == 0) {
+      return {name:'', value:''};
+    } else if (link.key.length > 1) {
+      link.key = link.key.replace('existing-project/', '');;
+      link.key = link.key.replace('.rds', '');;
+      return {name:link.key, value:link.key}
     } 
   });
 
@@ -264,7 +290,7 @@ const rows = riverInformation.map((link) =>  {
                     />
                   </Paper>
                     </div>
-
+                        
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -278,18 +304,10 @@ const rows = riverInformation.map((link) =>  {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            The project Artemis data pipeline is developed to only accept file uploads following a specific nomenclature.
-            First, all files uploaded must have the extension type <b>.csv</b>. 
+            The project Artemis data pipeline is developed for ease of use. Simply select the Project Id you are uploading for from the dropdown menu. 
             <br></br>
             <br></br>
-            Files should be named using the following convention where DIGITS refers to any numeric value <b>[0-9]</b> and CHARACTERS refers to <b>[a-z]</b>.
-            <br></br>
-            <br></br>
-             <b>DIGITS-DIGITS-CHARACTERS.csv</b>
-            <br></br>
-            <br></br>
-             <i>Example: 18-0003-thisisanexample.csv</i>
-            <br></br>
+            Files must have the file extension <b>.csv</b>.
             <br></br>
             If any of these rules are not followed you will recieve an alert message and will <b>NOT</b> be able to upload
             your file.
@@ -313,8 +331,13 @@ const rows = riverInformation.map((link) =>  {
       </Accordion>
     </div>
     <br></br>
-    <br></br>
       <Form onSubmit={handleSubmit}>
+      <br></br>
+      
+    <SelectSearch options={listItems2} value="selectedid" name="language" search={true} placeholder="Select Your Project Id" filterOptions={fuzzySearch} onChange={onChange}
+          />
+        <br></br>
+       
         <Form.Group controlId="file">
         {/* <select> 
         <option>--Select a Program ID --</option>  

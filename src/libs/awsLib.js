@@ -1,7 +1,7 @@
 import { Storage } from "aws-amplify";
 
-export async function s3Upload(file) {
-  const filename = `${'existing-project/'}${file.name}`;
+export async function s3Upload(file,selectedid) {
+  const filename = `${'existing-project/'}${'model='}${selectedid}${'file='}${file.name}`;
 
   const stored = await Storage.vault.put(filename, file, {
     contentType: file.type,

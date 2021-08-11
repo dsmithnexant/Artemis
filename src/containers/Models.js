@@ -280,7 +280,7 @@ const classes2 = useStyles2();
             First, all files uploaded must have the extension type <b>.csv</b>. 
             <br></br>
             <br></br>
-            Files should be named using the following convention where DIGITS refers to any numeric value <b>[0-9]</b> and CHARACTERS refers to <b>[a-z]</b>.
+            Files should be named using the following convention where DIGITS refers to any numeric value <b>[0-9]</b>.
             <br></br>
             <br></br>
              <b>DIGITS-DIGITS.csv</b>
