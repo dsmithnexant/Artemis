@@ -91,9 +91,9 @@ const classes2 = useStyles2();
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
-    console.log(file.current);
+    //console.log(file.current);
     if (file.current != undefined) {
-        console.log(file.current.name.length > 1);
+        //console.log(file.current.name.length > 1);
         setIsDisabled(false);
   }else{setIsDisabled(true)}}
 
@@ -130,7 +130,7 @@ const classes2 = useStyles2();
     }
   }
 
-console.log(selectedid)
+//console.log(selectedid)
 //Display list of files uploaded by specific user
 useEffect(() => {
   Storage.list('existing-project/', { level: 'private' })
@@ -148,7 +148,7 @@ useEffect(() => {
   );
   }, [])
 
-console.log(riverInformation);
+//console.log(riverInformation);
 
 
 // useEffect(() => {
@@ -184,6 +184,8 @@ const rows = riverInformation.map((link) =>  {
   if (link.key.length == 0) {
       return createData() ;
     } else if (link.key.length > 1) {
+      link.key = link.key.replace(/^model=([0-9]+-[0-9]+)/, '');;
+      link.key = link.key.replace(/^file=/, '');;
       return createData(link.key)
     } 
   });

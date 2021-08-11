@@ -109,7 +109,7 @@ const classes2 = useStyles2();
   function handleFileChange(event) {
     file.current = event.target.files[0];
     if (file.current != undefined) {
-        console.log(file.current.name.length > 1);
+        //console.log(file.current.name.length > 1);
         setIsDisabled(false);
   }else{setIsDisabled(true)}}
 
@@ -154,7 +154,7 @@ const classes2 = useStyles2();
     );
     }, [])
 
-  console.log(riverInformation);
+  //console.log(riverInformation);
   
 
 /*   const listItems = riverInformation.map((link) =>
