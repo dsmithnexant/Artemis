@@ -113,6 +113,7 @@ const classes2 = useStyles2();
         setIsDisabled(false);
   }else{setIsDisabled(true)}}
 
+  
   async function handleSubmit(event) {
     event.preventDefault();
     var val_filename = /^([0-9]+-[0-9]+).csv/.test(file.current.name);
@@ -124,7 +125,10 @@ const classes2 = useStyles2();
       alert(' filename does not follow correct format specified.');
       return false;
     }
-
+    if (listItems.includes(file.current.name.replace('.csv', ''))) {
+      alert(' This model already exists in the system.');
+      return false;
+    }
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
         `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE / 1000000
@@ -164,17 +168,17 @@ const classes2 = useStyles2();
     if (link.key.length == 0) {
         return null ;
       } else if (link.key.length > 1) {
-        link.key = link.key.replace('_Cubist Model.rds', '');;
-        return (<ListItem key={link.key}>{link.key}</ListItem>);
+        link.key = link.key.replace('.rds', '');;
+        return link.key;
       } 
     });
 
-  const rows = riverInformation.map((link) =>  { 
-    if (link.key.length == 0) {
+  const rows = riverInformation.map((link2) =>  { 
+    if (link2.key.length == 0) {
         return createData() ;
-      } else if (link.key.length > 1) {
-        link.key = link.key.replace('_Cubist Model.rds', '');;
-        return createData(link.key)
+      } else if (link2.key.length > 1) {
+        link2.key = link2.key.replace('', '');;
+        return createData(link2.key)
       } 
     });
 
@@ -189,7 +193,7 @@ const classes2 = useStyles2();
   }));
     
   const classes = useStyles();
-
+  
   return (
     <div className="Models">
 

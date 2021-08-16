@@ -9,7 +9,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { onError } from "./libs/errorLib";
 
-
 function App() {
   const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
