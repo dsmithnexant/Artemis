@@ -325,7 +325,7 @@ const classes2 = useStyles2();
           value={date1}
           format="MM/d/y"
           required = {true}
-          maxDate = {date2}
+          maxDate = {date1}
         /></h5>
         <br></br>
         <br></br>
@@ -334,7 +334,7 @@ const classes2 = useStyles2();
           value={date2}
           format="MM/d/y"
           required = {true}
-          minDate = {date1}
+          minDate = {date2}
         /></h5>
         <br></br>
         <br></br>
