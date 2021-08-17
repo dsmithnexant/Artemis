@@ -26,6 +26,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import SelectSearch from 'react-select-search';
 import fuzzySearch from "./fuzzySearch";
+import { Auth } from "aws-amplify";
 
 export default function NewNote() {
   const file = useRef(null);
@@ -36,6 +37,9 @@ export default function NewNote() {
   const [riverInformation, setRiverInformation] = useState([{key: ''}]);
   const [riverInformation2, setRiverInformation2] = useState([{key: ''}]);
   const [selectedid, onChange] = useState('');
+  
+  
+  
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -85,6 +89,17 @@ const useStyles2 = makeStyles({
 });
   
 const classes2 = useStyles2();
+
+
+
+
+// Auth.currentAuthenticatedUser({
+//   bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+// }).then(user => console.log(user.attributes.email))
+// .catch(err => console.log(err));
+
+
+
 
 
 
