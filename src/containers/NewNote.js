@@ -191,6 +191,9 @@ const listItems = riverInformation.map((link) =>  {
       return null ;
     } else if (link.key.length > 1) {
       link.key = link.key.replace('existing-project/', '');;
+      link.key = link.key.replace(/^email=(.*)model=/, '');;
+      //link.key = link.key.replace(/^model=(.*)/, '');;
+      link.key = link.key.replace(/^(.*)file=/, '');;
       return (<ListItem key={link.key}>{link.key}</ListItem>);
     } 
   });
