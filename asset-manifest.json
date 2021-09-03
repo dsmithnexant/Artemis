@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Artemis/static/css/main.a6ab31a9.chunk.css",
-    "main.js": "/Artemis/static/js/main.d1211000.chunk.js",
-    "main.js.map": "/Artemis/static/js/main.d1211000.chunk.js.map",
+    "main.js": "/Artemis/static/js/main.ccdad89d.chunk.js",
+    "main.js.map": "/Artemis/static/js/main.ccdad89d.chunk.js.map",
     "runtime-main.js": "/Artemis/static/js/runtime-main.7f69c29e.js",
     "runtime-main.js.map": "/Artemis/static/js/runtime-main.7f69c29e.js.map",
     "static/css/2.9c6b934b.chunk.css": "/Artemis/static/css/2.9c6b934b.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.9c6b934b.chunk.css",
     "static/js/2.8d99a62a.chunk.js",
     "static/css/main.a6ab31a9.chunk.css",
-    "static/js/main.d1211000.chunk.js"
+    "static/js/main.ccdad89d.chunk.js"
   ]
 }
