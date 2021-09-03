@@ -334,7 +334,7 @@ const classes2 = useStyles2();
           value={date2}
           format="MM/d/y"
           required = {true}
-          minDate = {date2}
+          minDate = {date1}
         /></h5>
         <br></br>
         <br></br>
